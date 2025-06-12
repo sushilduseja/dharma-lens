@@ -1,0 +1,533 @@
+
+[
+  {
+    "pattern_id": "karmic_echo_unworthiness",
+    "pattern_name": "The Echo of Unworthiness",
+    "keywords_and_themes": ["self-doubt", "inner critic", "imposter syndrome"],
+    "modern_context": "This pattern manifests as persistent self-doubt despite external achievements, often rooted in childhood conditioning or societal comparisons. Users report feeling 'never good enough' even when objectively successful.",
+    "mythological_archetype": {
+      "source": "Mahabharata",
+      "summary": "Arjuna's crisis of confidence on the Kurukshetra battlefield mirrors modern self-doubt. Despite being the greatest archer, he questions his worthiness to fight. Krishna's guidance in the Bhagavad Gita (2:47) reframes action without attachment to results."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Nishkama Karma",
+      "explanation": "Focus on perfecting your actions rather than obsessing over outcomes. Like Arjuna, perform your dharma with excellence while surrendering anxiety about validation or success."
+    },
+    "dharmic_guidance": [
+      "Practice 'aham brahmasmi' meditation daily: 5 minutes affirming 'I am consciousness itself' before important tasks.",
+      "Keep a 'dharma diary' tracking moments when you acted according to your values rather than seeking validation.",
+      "Ask nightly: 'What service did I perform today that needed no recognition?'"
+    ]
+  },
+  {
+    "pattern_id": "maya_attachment_cycle",
+    "pattern_name": "The Golden Chains of Attachment",
+    "keywords_and_themes": ["material obsession", "fear of loss", "identity through possessions"],
+    "modern_context": "Users report anxiety about maintaining lifestyles, measuring self-worth through acquisitions, and emptiness after achieving material goals.",
+    "mythological_archetype": {
+      "source": "Bhagavata Purana",
+      "summary": "King Bharata's story illustrates attachment's dangers. After renouncing his kingdom for spirituality, he becomes attached to a deer, leading to rebirth. The Purana warns that even spiritual progress can be derailed by subtle attachments."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Vairagya",
+      "explanation": "Cultivate non-attachment through conscious appreciation without possession. Enjoy life's gifts while remembering their temporary nature."
+    },
+    "dharmic_guidance": [
+      "Practice 'conscious consumption'—pause 10 seconds before purchases asking 'Does this serve my dharma?'",
+      "Create a 'maya mirror' ritual: Weekly review of possessions while chanting 'neti neti' (not this, not this).",
+      "Voluntary simplicity challenge: Spend one day monthly with only essential items."
+    ]
+  },
+  {
+    "pattern_id": "dharma_confusion_crossroads",
+    "pattern_name": "The Dharma Crossroads",
+    "keywords_and_themes": ["decision paralysis", "ethical dilemmas", "purpose confusion"],
+    "modern_context": "Users face overwhelming choices in career, relationships, and lifestyle, often torn between societal expectations and inner calling.",
+    "mythological_archetype": {
+      "source": "Ramayana",
+      "summary": "Lord Rama's exile dilemma embodies dharma conflict. As prince, he honors father's promise over royal rights, showing that true dharma sometimes requires personal sacrifice for greater cosmic order."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Svadharma",
+      "explanation": "Your unique dharma emerges at the intersection of personal talents, societal needs, and cosmic rhythm. Like Rama, make choices aligning with your essential nature."
+    },
+    "dharmic_guidance": [
+      "Create a 'dharma compass'—list core values then rate decisions on 1-5 alignment scale.",
+      "Practice 'nishcala samadhi'—sit motionless 3 minutes daily, observing where mind naturally settles.",
+      "Ask critical questions: 'Which choice expands my consciousness?' 'What would my wisest self do?'"
+    ]
+  },
+  {
+    "pattern_id": "cycle_of_envy",
+    "pattern_name": "The Cycle of Envy",
+    "keywords_and_themes": ["jealousy", "comparison", "resentment"],
+    "modern_context": "This pattern emerges in a culture of comparison—social media, workplace, or family—where another’s success triggers feelings of lack or resentment.",
+    "mythological_archetype": {
+      "source": "Mahabharata",
+      "summary": "Duryodhana’s envy of the Pandavas drives much of the epic’s conflict. His inability to celebrate others’ joy leads to his own downfall, illustrating the self-destructive nature of envy."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Mudita (Sympathetic Joy)",
+      "explanation": "Cultivate joy in others’ happiness. Recognize that another’s success does not diminish your own potential."
+    },
+    "dharmic_guidance": [
+      "Each time envy arises, silently bless the other person’s success.",
+      "Journal: 'What does their achievement awaken in me?'",
+      "Practice gratitude for your own journey, listing three unique strengths."
+    ]
+  },
+  {
+    "pattern_id": "burden_of_perfectionism",
+    "pattern_name": "The Burden of Perfectionism",
+    "keywords_and_themes": ["perfectionism", "fear of failure", "self-criticism"],
+    "modern_context": "A relentless drive for flawlessness leads to burnout, anxiety, and procrastination. Mistakes are seen as personal failures rather than learning opportunities.",
+    "mythological_archetype": {
+      "source": "Ramayana",
+      "summary": "Lakshmana’s unwavering devotion sometimes manifests as harshness—he expects perfection from himself and others, leading to moments of anger and regret."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Shraddha (Faith)",
+      "explanation": "Have faith in the process. Perfection is not the goal—growth is. Allow yourself to be human."
+    },
+    "dharmic_guidance": [
+      "Celebrate one mistake each day as a sign of effort and learning.",
+      "Set 'good enough' standards for routine tasks.",
+      "Ask: 'What am I afraid will happen if I am not perfect?'"
+    ]
+  },
+  {
+    "pattern_id": "shadow_of_anger",
+    "pattern_name": "The Shadow of Anger",
+    "keywords_and_themes": ["anger", "rage", "impulsivity"],
+    "modern_context": "Uncontrolled anger damages relationships and health. It often masks deeper pain or a sense of injustice.",
+    "mythological_archetype": {
+      "source": "Bhagavata Purana",
+      "summary": "Hiranyakashipu’s rage against Vishnu and his own son Prahlada ultimately destroys him. His anger is rooted in wounded pride and loss."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Kshama (Forgiveness)",
+      "explanation": "Anger is a fire that burns the vessel first. Practice forgiveness—for yourself and others."
+    },
+    "dharmic_guidance": [
+      "Pause and breathe deeply when anger arises—count to ten before responding.",
+      "Write a letter (not sent) expressing your anger, then burn it as a ritual of release.",
+      "Reflect: 'What pain is my anger protecting?'"
+    ]
+  },
+  {
+    "pattern_id": "web_of_attachment",
+    "pattern_name": "The Web of Attachment",
+    "keywords_and_themes": ["attachment", "dependency", "fear of loss"],
+    "modern_context": "Clinging to people, possessions, or outcomes breeds anxiety and disappointment. Letting go feels threatening, even when it is necessary for growth.",
+    "mythological_archetype": {
+      "source": "Bhagavata Purana",
+      "summary": "King Bharata, after renouncing his kingdom, becomes attached to a deer. This attachment leads to his rebirth, illustrating how even spiritual seekers can be ensnared by subtle dependencies."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Vairagya (Non-attachment)",
+      "explanation": "Enjoy life’s gifts without clinging. Freedom arises when you love without possessiveness."
+    },
+    "dharmic_guidance": [
+      "Spend one day a week practicing non-attachment—let go of one small comfort.",
+      "Meditate on impermanence: visualize the eventual loss of all things.",
+      "Ask: 'What am I truly afraid of losing?'"
+    ]
+  },
+  {
+    "pattern_id": "veil_of_ignorance",
+    "pattern_name": "The Veil of Ignorance",
+    "keywords_and_themes": ["ignorance", "delusion", "lack of self-awareness"],
+    "modern_context": "Many drift through life unaware of their true nature, repeating patterns unconsciously. This ignorance sustains suffering and confusion.",
+    "mythological_archetype": {
+      "source": "Upanishads",
+      "summary": "The story of Nachiketa in the Katha Upanishad: He seeks the truth beyond death, piercing the veil of ignorance with persistent inquiry and courage."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Atma-Vichara (Self-Inquiry)",
+      "explanation": "Question the nature of the self. Ignorance dissolves through direct, fearless inquiry."
+    },
+    "dharmic_guidance": [
+      "Practice self-inquiry: 'Who am I?' for 10 minutes daily.",
+      "Read one passage from the Upanishads each morning and reflect.",
+      "Ask: 'What belief about myself am I ready to question?'"
+    ]
+  },
+  {
+    "pattern_id": "burden_of_guilt",
+    "pattern_name": "The Burden of Guilt",
+    "keywords_and_themes": ["guilt", "remorse", "self-punishment"],
+    "modern_context": "Unresolved guilt over past actions leads to self-punishment and avoidance of joy. It can paralyze growth and relationships.",
+    "mythological_archetype": {
+      "source": "Mahabharata",
+      "summary": "Yudhishthira’s guilt after the war weighs heavily on him. He seeks redemption through penance and service, ultimately finding forgiveness in selfless action."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Prayaschitta (Atonement)",
+      "explanation": "Transform guilt into positive action. Atonement is not self-punishment, but conscious redirection of energy toward healing."
+    },
+    "dharmic_guidance": [
+      "Make amends where possible—write a letter or offer service.",
+      "Forgive yourself: meditate on compassion for your younger self.",
+      "Ask: 'How can I turn this pain into purpose?'"
+    ]
+  },
+  {
+    "pattern_id": "fear_of_change",
+    "pattern_name": "The Fear of Change",
+    "keywords_and_themes": [
+      "resistance",
+      "anxiety",
+      "clinging to the familiar"
+    ],
+    "modern_context": "Change, even positive, triggers anxiety and resistance. The comfort zone feels safer than the unknown.",
+    "mythological_archetype": {
+      "source": "Ramayana",
+      "summary": "Sita’s abduction and exile force her into radical change. Her resilience and adaptability become sources of strength and spiritual growth."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Anitya (Impermanence)",
+      "explanation": "All things change. Embrace impermanence as a source of renewal, not loss."
+    },
+    "dharmic_guidance": [
+      "List three changes you once feared that led to growth.",
+      "Practice 'letting go' rituals—release one outdated belief or object.",
+      "Ask: 'What new possibility does this change invite?'"
+    ]
+  },
+  {
+    "pattern_id": "loneliness_in_crowd",
+    "pattern_name": "Loneliness in the Crowd",
+    "keywords_and_themes": [
+      "isolation",
+      "alienation",
+      "disconnection"
+    ],
+    "modern_context": "Despite constant connectivity, many feel deeply alone, misunderstood, and unseen.",
+    "mythological_archetype": {
+      "source": "Mahabharata",
+      "summary": "Karna, though surrounded by allies, is alienated due to his secret birth and divided loyalties. His loneliness is both external and existential."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Satsang (Holy Company)",
+      "explanation": "Seek genuine connection with those who share your values. True belonging is found in authenticity, not numbers."
+    },
+    "dharmic_guidance": [
+      "Reach out to someone who shares your values for a meaningful conversation.",
+      "Join a community (virtual or physical) aligned with your interests.",
+      "Reflect: 'Where do I feel most authentically myself?'"
+    ]
+  },
+  {
+    "pattern_id": "mask_of_people_pleasing",
+    "pattern_name": "The Mask of People-Pleasing",
+    "keywords_and_themes": [
+      "people-pleasing",
+      "loss of self",
+      "fear of rejection"
+    ],
+    "modern_context": "Chronic need to please others leads to self-betrayal, exhaustion, and resentment. Boundaries are blurred or absent.",
+    "mythological_archetype": {
+      "source": "Mahabharata",
+      "summary": "Yudhishthira’s desire to always do the right thing sometimes leads him to avoid necessary conflict, causing greater harm in the long run."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Svadharma (Personal Duty)",
+      "explanation": "Honor your own path. True dharma is not about pleasing everyone, but living in alignment with your deepest truth."
+    },
+    "dharmic_guidance": [
+      "Practice saying 'no' to one non-essential request this week.",
+      "Journal: 'What do I sacrifice when I say yes to everyone?'",
+      "Ask: 'What does my heart truly want in this situation?'"
+    ]
+  },
+  {
+    "pattern_id": "mask_of_invisibility",
+    "pattern_name": "The Mask of Invisibility",
+    "keywords_and_themes": [
+      "invisibility",
+      "neglect",
+      "unseen self"
+    ],
+    "modern_context": "A sense of being overlooked or unrecognized, leading to withdrawal or self-silencing in groups or relationships.",
+    "mythological_archetype": {
+      "source": "Mahabharata",
+      "summary": "Kunti, the mother of the Pandavas, often remains in the background, her sacrifices unseen. Her quiet endurance highlights the pain and power of the invisible caregiver."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Seva (Selfless Service)",
+      "explanation": "True service is often unseen. Value your contributions, even when others do not acknowledge them."
+    },
+    "dharmic_guidance": [
+      "Acknowledge your own efforts privately each evening.",
+      "Volunteer for a task no one notices and do it with love.",
+      "Reflect: 'What makes me feel truly seen?'"
+    ]
+  },
+  {
+    "pattern_id": "wound_of_betrayal",
+    "pattern_name": "The Wound of Betrayal",
+    "keywords_and_themes": [
+      "betrayal",
+      "trust issues",
+      "broken promises"
+    ],
+    "modern_context": "Deep pain from broken trust—by friends, family, or institutions—leading to guardedness or cynicism.",
+    "mythological_archetype": {
+      "source": "Mahabharata",
+      "summary": "Draupadi is humiliated in court after being betrayed by those sworn to protect her. Her resilience in the face of betrayal becomes her strength."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Shraddha (Faith)",
+      "explanation": "Rebuild trust first within yourself and the Divine. Faith is the antidote to the poison of betrayal."
+    },
+    "dharmic_guidance": [
+      "Write a letter (unsent) to the one who betrayed you, expressing your feelings.",
+      "List three people you trust and why.",
+      "Ask: 'How can I rebuild trust in myself?'"
+    ]
+  },
+  {
+    "pattern_id": "curse_of_comparison",
+    "pattern_name": "The Curse of Comparison",
+    "keywords_and_themes": [
+      "comparison",
+      "envy",
+      "self-worth"
+    ],
+    "modern_context": "Constantly measuring oneself against others, leading to dissatisfaction, jealousy, or inferiority.",
+    "mythological_archetype": {
+      "source": "Ramayana",
+      "summary": "Surpanakha’s envy of Sita’s beauty and status leads to destructive actions, illustrating the suffering born of comparison."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Santosha (Contentment)",
+      "explanation": "True contentment arises from within. Celebrate your unique journey and gifts."
+    },
+    "dharmic_guidance": [
+      "Practice gratitude journaling: list three things unique to you.",
+      "Limit social media use for one week.",
+      "Reflect: 'What do I admire in others that I can nurture in myself?'"
+    ]
+  },
+  {
+    "pattern_id": "burden_of_expectations",
+    "pattern_name": "The Burden of Expectations",
+    "keywords_and_themes": [
+      "expectations",
+      "pressure",
+      "family duty"
+    ],
+    "modern_context": "Crushed under the weight of others’ hopes—parents, society, or culture—leading to anxiety or rebellion.",
+    "mythological_archetype": {
+      "source": "Mahabharata",
+      "summary": "Yudhishthira, as eldest Pandava, is expected to embody dharma. The pressure to be perfect causes inner turmoil and costly mistakes."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Satya (Truthfulness)",
+      "explanation": "Live your truth, not others’ scripts. Honesty with oneself is the highest dharma."
+    },
+    "dharmic_guidance": [
+      "Identify one expectation to release this week.",
+      "Have an honest conversation with a loved one about your true aspirations.",
+      "Ask: 'Whose dreams am I carrying?'"
+    ]
+  },
+  {
+    "pattern_id": "shadow_of_resentment",
+    "pattern_name": "The Shadow of Resentment",
+    "keywords_and_themes": [
+      "resentment",
+      "bitterness",
+      "grudges"
+    ],
+    "modern_context": "Holding onto past hurts, replaying old wounds, and allowing bitterness to cloud present joy.",
+    "mythological_archetype": {
+      "source": "Mahabharata",
+      "summary": "Karna’s lifelong resentment over his birth and rejection by society fuels his tragic choices, even when offered compassion."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Kshama (Forgiveness)",
+      "explanation": "Forgiveness is liberation. Release the grip of old injuries to free your own heart."
+    },
+    "dharmic_guidance": [
+      "Write down your resentments, then ritually burn or release them.",
+      "Practice metta (loving-kindness) meditation for those who wronged you.",
+      "Ask: 'What is resentment costing me?'"
+    ]
+  },
+  {
+    "pattern_id": "quest_for_identity",
+    "pattern_name": "The Quest for Identity",
+    "keywords_and_themes": [
+      "identity crisis",
+      "self-discovery",
+      "belonging"
+    ],
+    "modern_context": "Feeling lost, undefined, or fragmented—struggling to know 'Who am I?' in a world of shifting roles.",
+    "mythological_archetype": {
+      "source": "Mahabharata",
+      "summary": "Karna’s lifelong search for his true lineage and identity shapes his destiny, torn between loyalty and self-acceptance."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Atma-Vichara (Self-Inquiry)",
+      "explanation": "Your true self is beyond roles or labels. Seek the unchanging witness within."
+    },
+    "dharmic_guidance": [
+      "Spend 10 minutes daily in silent self-inquiry: 'Who am I, really?'",
+      "List the roles you play, then reflect on what remains when they are gone.",
+      "Ask: 'What part of me never changes?'"
+    ]
+  },
+  {
+    "pattern_id": "river_of_grief",
+    "pattern_name": "The River of Grief",
+    "keywords_and_themes": ["grief", "loss", "mourning"],
+    "modern_context": "Deep sorrow after loss—of loved ones, dreams, or identity—often resisted or unexpressed.",
+    "mythological_archetype": {
+      "source": "Mahabharata",
+      "summary": "Ganga’s sorrow at losing her sons, and Gandhari’s grief after the war, show the transformative power of mourning."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Anitya (Impermanence)",
+      "explanation": "All things pass. Allow grief to flow; it cleanses and renews."
+    },
+    "dharmic_guidance": [
+      "Set aside time to honor your loss—write, sing, or create.",
+      "Share your grief with someone you trust.",
+      "Ask: 'What is this grief teaching me about love?'"
+    ]
+  },
+  {
+    "pattern_id": "weight_of_regret",
+    "pattern_name": "The Weight of Regret",
+    "keywords_and_themes": ["regret", "past mistakes", "self-blame"],
+    "modern_context": "Haunted by past choices, unable to move forward, or forgive oneself.",
+    "mythological_archetype": {
+      "source": "Mahabharata",
+      "summary": "Bhishma’s regret over his vow and its consequences lingers until his death, teaching the importance of conscious choice."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Prayaschitta (Atonement)",
+      "explanation": "Acknowledge mistakes, make amends, and then release the burden."
+    },
+    "dharmic_guidance": [
+      "Write down your regrets, then tear up the paper as a symbol of release.",
+      "Make amends if possible, or practice self-forgiveness meditation.",
+      "Ask: 'What lesson can I carry forward?'"
+    ]
+  },
+  {
+    "pattern_id": "mirror_of_pride",
+    "pattern_name": "The Mirror of Pride",
+    "keywords_and_themes": ["pride", "ego", "arrogance"],
+    "modern_context": "Inflated sense of self, difficulty accepting feedback, or feeling superior to others.",
+    "mythological_archetype": {
+      "source": "Ramayana",
+      "summary": "Ravana’s pride blinds him to his faults and ultimately leads to his destruction."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Vinaya (Humility)",
+      "explanation": "Humility opens the heart to growth and connection. True greatness is gentle."
+    },
+    "dharmic_guidance": [
+      "Seek feedback from someone you respect.",
+      "Perform one act of service anonymously.",
+      "Ask: 'Where can I practice more humility?'"
+    ]
+  },
+  {
+    "pattern_id": "dance_of_desire",
+    "pattern_name": "The Dance of Desire",
+    "keywords_and_themes": ["desire", "craving", "insatiability"],
+    "modern_context": "Endless wanting—of things, experiences, or people—never feeling satisfied.",
+    "mythological_archetype": {
+      "source": "Mahabharata",
+      "summary": "Draupadi’s desire for justice and Duryodhana’s for power both show how desire can uplift or consume."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Vairagya (Dispassion)",
+      "explanation": "Recognize desire’s impermanence. Let go, and discover peace."
+    },
+    "dharmic_guidance": [
+      "Notice one desire today without acting on it.",
+      "Reflect on the root of your strongest craving.",
+      "Ask: 'What am I truly seeking beneath this desire?'"
+    ]
+  },
+  {
+    "pattern_id": "veil_of_denial",
+    "pattern_name": "The Veil of Denial",
+    "keywords_and_themes": ["denial", "avoidance", "refusal to see truth"],
+    "modern_context": "Ignoring uncomfortable realities, pretending problems don’t exist, or refusing to accept change.",
+    "mythological_archetype": {
+      "source": "Mahabharata",
+      "summary": "Dhritarashtra’s refusal to see his sons’ faults leads to destruction, despite repeated warnings."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Satya (Truth)",
+      "explanation": "Face reality with courage. Truth, though hard, is the path to liberation."
+    },
+    "dharmic_guidance": [
+      "Name one truth you have been avoiding.",
+      "Share your truth with a trusted friend.",
+      "Ask: 'What am I afraid will happen if I face this?'"
+    ]
+  },
+  {
+    "pattern_id": "labyrinth_of_confusion",
+    "pattern_name": "The Labyrinth of Confusion",
+    "keywords_and_themes": ["confusion", "lack of clarity", "lostness"],
+    "modern_context": "Unable to see the way forward, feeling lost or directionless, unsure which path to choose.",
+    "mythological_archetype": {
+      "source": "Mahabharata",
+      "summary": "Arjuna’s confusion at Kurukshetra is dispelled only by surrender and guidance from Krishna."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Sharanagati (Surrender)",
+      "explanation": "Sometimes, clarity comes from letting go and asking for help."
+    },
+    "dharmic_guidance": [
+      "Ask for guidance—from within, mentors, or the Divine.",
+      "Take one small step, even if unsure.",
+      "Ask: 'What is the next right thing?'"
+    ]
+  },
+  {
+    "pattern_id": "spell_of_fear",
+    "pattern_name": "The Spell of Fear",
+    "keywords_and_themes": ["fear", "anxiety", "paralysis"],
+    "modern_context": "Overwhelmed by fear—of failure, rejection, or the unknown—leading to inaction or avoidance.",
+    "mythological_archetype": {
+      "source": "Ramayana",
+      "summary": "Hanuman’s initial fear before leaping to Lanka is overcome by remembering his true nature."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Abhaya (Fearlessness)",
+      "explanation": "Fear is natural, but courage is your birthright. Remember your strength."
+    },
+    "dharmic_guidance": [
+      "Name your fear aloud; it loses power when spoken.",
+      "Recall a time you acted despite fear.",
+      "Ask: 'What would I do if I were not afraid?'"
+    ]
+  },
+  {
+    "pattern_id": "garden_of_creativity",
+    "pattern_name": "The Garden of Creativity",
+    "keywords_and_themes": ["creativity", "expression", "inspiration"],
+    "modern_context": "Blocked creative flow, fear of judgment, or difficulty expressing one’s gifts.",
+    "mythological_archetype": {
+      "source": "Saraswati Purana",
+      "summary": "Goddess Saraswati embodies the free, flowing river of creativity, inspiring music, poetry, and wisdom."
+    },
+    "philosophical_guidance": {
+      "core_concept": "Lila (Divine Play)",
+      "explanation": "Creativity is play—express without attachment or fear."
+    },
+    "dharmic_guidance": [
+      "Create something daily, no matter how small.",
+      "Share your work with one person you trust.",
+      "Ask: 'What wants to be expressed through me?'"
+    ]
+  }
+]

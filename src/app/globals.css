@@ -1,0 +1,127 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Gradient-Inspired Theme - Light (Spiritual & Calm) */
+    --background: 150 30% 96%; /* Soft Off-White/Hint of Mint */
+    --foreground: 220 25% 30%; /* Dark Slate Blue */
+    
+    --card: 0 0% 100%; /* Clean White */
+    --card-foreground: 220 25% 30%; 
+    
+    --popover: 0 0% 100%; 
+    --popover-foreground: 220 25% 30%;
+    
+    --primary: 175 70% 45%; /* Vibrant Teal */
+    --primary-foreground: 0 0% 100%; /* White for high contrast */
+    
+    --secondary: 170 40% 90%; /* Very Light Teal/Mint for subtle secondary elements */
+    --secondary-foreground: 220 20% 40%; /* Slightly lighter Slate Blue */
+    
+    --muted: 150 25% 94%; /* Extremely light, almost ethereal cool tone for muted backgrounds */
+    --muted-foreground: 220 20% 55%; /* Soft, desaturated cool gray for muted text */
+    
+    --accent: 150 60% 60%; /* Luminous Seafoam Green */
+    --accent-foreground: 220 25% 20%; /* Darker Slate Blue on accent */
+    
+    --destructive: 0 70% 55%; /* Clear, but not jarring red */
+    --destructive-foreground: 0 0% 100%; 
+    
+    --border: 200 20% 88%; /* Soft cool gray-blue border */
+    
+    --input: 0 0% 100%; /* White background for inputs */
+    --input-border: 200 20% 80%; /* Slightly darker cool border for inputs */
+    
+    --ring: 175 70% 50%; /* Vibrant Teal for focus rings */
+
+    --chart-1: 175 70% 45%; /* Primary Teal */
+    --chart-2: 150 60% 60%; /* Accent Seafoam */
+    --chart-3: 175 65% 60%; /* Lighter Primary */
+    --chart-4: 150 55% 70%; /* Lighter Accent */
+    --chart-5: 175 60% 35%; /* Darker Primary */
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Gradient-Inspired Theme - Dark (Spiritual & Calm) */
+    --background: 225 30% 12%; /* Deep Sapphire Blue, slightly desaturated for depth */
+    --foreground: 170 40% 85%; /* Light Cyan/Mint */
+    
+    --card: 225 28% 18%; /* Slightly lighter dark blue for cards */
+    --card-foreground: 170 40% 85%;
+    
+    --popover: 225 25% 10%; /* Even darker for popovers for depth */
+    --popover-foreground: 170 40% 85%;
+    
+    --primary: 175 75% 55%; /* Luminous Teal - brighter for dark mode */
+    --primary-foreground: 225 20% 15%; /* Very dark blue text for strong contrast on primary */
+    
+    --secondary: 220 25% 20%; /* Darker Muted Blue for secondary elements */
+    --secondary-foreground: 170 35% 75%; 
+    
+    --muted: 225 20% 15%; /* Darker, very subtle muted cool indigo */
+    --muted-foreground: 170 30% 65%;
+    
+    --accent: 150 65% 65%; /* Brighter Seafoam Green accent */
+    --accent-foreground: 225 10% 10%; /* Dark text for contrast on accent */
+    
+    --destructive: 0 65% 60%; /* Deep, saturated red, not overly bright */
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 220 20% 25%; /* Subtle dark cool gray-blue border */
+    
+    --input: 225 25% 15%; /* Dark input background */
+    --input-border: 220 25% 35%; /* Slightly lighter cool border for inputs */
+    
+    --ring: 175 75% 60%; /* Luminous Teal for focus rings */
+
+    --chart-1: 175 75% 55%; /* Primary Luminous Teal */
+    --chart-2: 150 65% 65%; /* Accent Bright Seafoam */
+    --chart-3: 175 70% 70%; /* Lighter Primary */
+    --chart-4: 150 60% 75%; /* Lighter Accent */
+    --chart-5: 175 65% 45%; /* Darker Primary */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    scroll-behavior: smooth;
+    font-family: theme('fontFamily.body');
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-headline;
+  }
+  input, textarea, select {
+    @apply border-input-border;
+  }
+  ::selection {
+    background-color: hsl(var(--primary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+}
+
+/* Custom scrollbar for a more integrated feel */
+@layer utilities {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: theme('borderRadius.md');
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.7);
+    border-radius: theme('borderRadius.md');
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary));
+  }
+}
