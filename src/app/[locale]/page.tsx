@@ -3,18 +3,23 @@
 
 import React, { useState, useCallback } from 'react';
 import { Sparkles, Loader2 } from 'lucide-react';
+import { useTranslations, useLocale } from 'next-intl';
 import type { Pattern } from '@/types/dharmic';
 import { findBestMatch } from '@/lib/patternMatcher';
 import { getPersonalizedInsight, getEnhancedGuidance, getDynamicGuidance } from '@/app/actions';
 import type { EnhanceDharmicGuidanceOutput, EnhanceDharmicGuidanceInput } from '@/ai/flows/enhance-dharmic-guidance';
 import type { GenerateDynamicGuidanceOutput } from '@/ai/flows/generate-dynamic-guidance';
-import patternsImport from '@/data/patterns.json';
+import patternsImport from '@/data/patterns.json'; // Import patterns directly
 
 import { SituationCanvas } from '@/components/SituationCanvas';
 import { GuidanceDisplay } from '@/components/GuidanceDisplay';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
 import { CosmicBackground } from '@/components/CosmicBackground';
+import { AppHeader, AppFooter } from '@/components/AppChrome'; // Assuming AppHeader/Footer are in AppChrome
+
+// Make allPatternsStatic initialization more robust
+const allPatternsStatic: Pattern[] = patternsImport?.patterns || [];
 
 export interface ShlokaDetails {
   sanskrit: string;
@@ -22,34 +27,11 @@ export interface ShlokaDetails {
   hindi: string;
 }
 
-// Make allPatternsStatic initialization more robust
-const allPatternsStatic: Pattern[] = patternsImport?.patterns || [];
-
-const AppHeader = React.memo(() => (
-  <header className="py-6 md:py-10 text-center relative z-10 bg-transparent mb-0">
-    <h1 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-headline font-bold tracking-tight
-                   text-primary-foreground
-                   bg-gradient-to-r from-primary via-accent to-primary
-                   animate-shimmer bg-[length:200%_auto]
-                   drop-shadow-[0_3px_4px_hsl(var(--primary)/0.3)]
-                   px-6 py-3 rounded-lg">
-      Divya Drishti
-    </h1>
-    <p className="text-foreground/80 mt-3 text-base sm:text-lg md:text-xl filter drop-shadow-[0_1px_2px_hsl(var(--primary)/0.1)]">
-      Find clarity through timeless wisdom.
-    </p>
-  </header>
-));
-AppHeader.displayName = 'AppHeader';
-
-const AppFooter = React.memo(() => (
-   <footer className="py-6 md:py-8 mt-auto text-center text-sm text-muted-foreground relative z-10 border-t border-border/50">
-      <p>&copy; {new Date().getFullYear()} Divya Drishti. Insights for guidance and reflection.</p>
-    </footer>
-));
-AppFooter.displayName = 'AppFooter';
-
 export default function DharmalensPage() {
+  const t = useTranslations('DharmalensPage');
+  const locale = useLocale();
+  const { toast } = useToast();
+
   const [userSituation, setUserSituation] = useState<string>('');
   const [currentMatch, setCurrentMatch] = useState<Pattern | null>(null);
   const [personalizedInsight, setPersonalizedInsight] = useState<string | null>(null);
@@ -57,7 +39,6 @@ export default function DharmalensPage() {
   const [shlokaDetails, setShlokaDetails] = useState<ShlokaDetails | null>(null);
   const [isProcessingAI, setIsProcessingAI] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const { toast } = useToast();
   const [showGuidance, setShowGuidance] = useState<boolean>(false);
 
   const resetState = useCallback(() => {
@@ -74,8 +55,8 @@ export default function DharmalensPage() {
 
   const handleSubmit = useCallback(async () => {
     if (!userSituation.trim()) {
-      setError("Please describe your situation before proceeding.");
-      toast({ title: "Input Required", description: "Please describe your situation.", variant: "destructive" });
+      setError(t('errorInputRequiredDescription'));
+      toast({ title: t('toastInputRequiredTitle'), description: t('toastInputRequiredDescription'), variant: "destructive" });
       return;
     }
     setIsProcessingAI(true);
@@ -87,10 +68,10 @@ export default function DharmalensPage() {
     setShowGuidance(false);
 
     if (!allPatternsStatic || allPatternsStatic.length === 0) {
-      const errorMsg = "Error: Imported patterns data is empty or invalid. Please check src/data/patterns.json.";
+      const errorMsg = t('errorPatternsNotLoaded', { filePath: 'src/data/patterns.json' });
       setError(errorMsg);
       toast({
-        title: "Patterns Data Error",
+        title: t('toastPatternsErrorTitle'),
         description: errorMsg,
         variant: "destructive",
       });
@@ -98,27 +79,57 @@ export default function DharmalensPage() {
       return;
     }
 
-    const bestMatch = findBestMatch(userSituation, allPatternsStatic);
+    const bestMatchRaw = findBestMatch(userSituation, allPatternsStatic);
 
     try {
       await new Promise(resolve => setTimeout(resolve, 200));
 
-      if (bestMatch) {
-        setCurrentMatch(bestMatch);
+      if (bestMatchRaw) {
+        let finalPatternName = bestMatchRaw.pattern_name;
+        let finalModernContext = bestMatchRaw.modern_context;
+        let finalMythologicalSummary = bestMatchRaw.mythological_archetype?.summary || t('defaultMythologicalSummary');
+        let finalPhilosophicalExplanation = bestMatchRaw.philosophical_guidance?.explanation || '';
+        let finalDharmicGuidance = bestMatchRaw.dharmic_guidance || [];
+
+        if (locale !== 'en' && bestMatchRaw.translations && (bestMatchRaw.translations as any)[locale]) {
+          const localeTranslations = (bestMatchRaw.translations as any)[locale];
+          finalPatternName = localeTranslations.pattern_name || finalPatternName;
+          finalModernContext = localeTranslations.modern_context || finalModernContext;
+          finalMythologicalSummary = localeTranslations.mythological_archetype_summary || finalMythologicalSummary;
+          finalPhilosophicalExplanation = localeTranslations.philosophical_guidance_explanation || finalPhilosophicalExplanation;
+          finalDharmicGuidance = localeTranslations.dharmic_guidance || finalDharmicGuidance;
+        }
+
+        const bestMatchForDisplay: Pattern = {
+          ...bestMatchRaw,
+          pattern_name: finalPatternName,
+          modern_context: finalModernContext,
+          dharmic_guidance: finalDharmicGuidance,
+          mythological_archetype: bestMatchRaw.mythological_archetype ? {
+            ...bestMatchRaw.mythological_archetype,
+            summary: finalMythologicalSummary
+          } : undefined,
+          philosophical_guidance: bestMatchRaw.philosophical_guidance ? {
+            ...bestMatchRaw.philosophical_guidance,
+            explanation: finalPhilosophicalExplanation
+          } : undefined,
+        };
+        setCurrentMatch(bestMatchForDisplay);
+
         const guidanceInput: EnhanceDharmicGuidanceInput = {
           situationDescription: userSituation,
-          patternIdentified: bestMatch.pattern_name,
-          mythologicalSummary: bestMatch.mythological_archetype?.summary || "A relevant ancient story.",
-          currentGuidance: bestMatch.dharmic_guidance,
-          targetLanguage: 'en',
+          patternIdentified: finalPatternName,
+          mythologicalSummary: finalMythologicalSummary,
+          currentGuidance: finalDharmicGuidance,
+          targetLanguage: locale,
         };
 
         const [insightResult, guidanceResult] = await Promise.all([
           getPersonalizedInsight({
             situation: userSituation,
-            mythologicalSummary: bestMatch.mythological_archetype?.summary || "A relevant ancient story.",
-            insightTemplate: bestMatch.modern_context,
-            targetLanguage: 'en',
+            mythologicalSummary: finalMythologicalSummary,
+            insightTemplate: finalModernContext,
+            targetLanguage: locale,
           }),
           getEnhancedGuidance(guidanceInput) as Promise<EnhanceDharmicGuidanceOutput>
         ]);
@@ -136,17 +147,18 @@ export default function DharmalensPage() {
           setShlokaDetails(null);
         }
         toast({
-          title: "Guidance Revealed!",
-          description: `Pattern: ${bestMatch.pattern_name}`,
+          title: t('toastGuidanceRevealedTitle'),
+          description: `${t('toastGuidanceRevealedPatternLabel')}: ${finalPatternName}`,
         });
+
       } else {
         toast({
-          title: "Seeking Deeper Wisdom...",
-          description: "No predefined pattern matched. Crafting personalized guidance for your unique situation.",
+          title: t('toastDeeperWisdomTitle'),
+          description: t('toastDeeperWisdomDescription'),
         });
         const dynamicGuidanceResult: GenerateDynamicGuidanceOutput = await getDynamicGuidance({
           userSituation,
-          targetLanguage: 'en'
+          targetLanguage: locale
         });
 
         const dynamicPattern: Pattern = {
@@ -169,26 +181,26 @@ export default function DharmalensPage() {
           setShlokaDetails(null);
         }
         toast({
-          title: "Personalized Guidance Unveiled!",
-          description: `Insight: ${dynamicGuidanceResult.generated_pattern_name}`,
+          title: t('toastPersonalizedGuidanceTitle'),
+          description: `${t('toastPersonalizedGuidanceInsightLabel')}: ${dynamicGuidanceResult.generated_pattern_name}`,
         });
       }
       setShowGuidance(true);
 
     } catch (e: any) {
-      console.error("AI processing error in DharmalensPage:", e);
-      const originalErrorMessage = e.message || 'An unexpected error occurred during AI processing.';
-      const finalErrorMessage = `An error occurred: ${originalErrorMessage}${e.stack ? `\nStack: ${e.stack}` : ''}`;
+      console.error("AI processing error:", e);
+      const originalErrorMessage = e.message || t('errorAIProcessingFailed');
+      const finalErrorMessage = `${t('errorOccurred')}: ${originalErrorMessage}${e.stack ? `\nStack: ${e.stack}` : ''}`;
       setError(finalErrorMessage);
       toast({
-        title: "Guidance Generation Failed",
-        description: originalErrorMessage + " Please try rephrasing or try again later.",
+        title: t('toastGuidanceFailedTitle'),
+        description: originalErrorMessage + " " + t('toastGuidanceFailedSuggestion'),
         variant: "destructive",
       });
     } finally {
       setIsProcessingAI(false);
     }
-  }, [userSituation, toast]);
+  }, [userSituation, toast, locale, t]);
 
   return (
     <div className="flex flex-col min-h-screen bg-background relative isolate">
@@ -198,7 +210,7 @@ export default function DharmalensPage() {
         {error && !isProcessingAI && (
           <Alert variant="destructive" className="mb-6 max-w-2xl w-full animate-fade-in-up bg-destructive/95 text-destructive-foreground shadow-lg">
             <Sparkles className="h-5 w-5" />
-            <AlertTitle className="text-lg">Encountered an Obstacle</AlertTitle>
+            <AlertTitle className="text-lg">{t('alertErrorTitle')}</AlertTitle>
             <AlertDescription className="text-base whitespace-pre-wrap">{error}</AlertDescription>
           </Alert>
         )}
@@ -213,7 +225,7 @@ export default function DharmalensPage() {
         {isProcessingAI && (
              <div className="flex flex-col items-center justify-center mt-8 animate-fade-in-up">
                 <Loader2 className="h-12 w-12 animate-spin text-primary" />
-                <p className="mt-4 text-lg text-muted-foreground">Unveiling Your Path...</p>
+                <p className="mt-4 text-lg text-muted-foreground">{t('loadingAI')}</p>
             </div>
         )}
 
