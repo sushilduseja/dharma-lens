@@ -17,10 +17,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Add this temporarily for debugging
-  experimental: {
-    serverComponentsExternalPackages: [],
-  },
+  // Updated for Next.js 15
+  serverExternalPackages: [],
 };
 
 export default nextConfig;
