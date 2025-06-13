@@ -1,10 +1,10 @@
-
 'use client';
 
-import React, { type Dispatch, type SetStateAction, type ElementType } from 'react';
+import React, { type ElementType, type FormEvent, type Dispatch, type SetStateAction } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import type { Locale } from '@/i18n/config';
 import { 
   Loader2, XCircle, Wand2, Award, Activity, HeartHandshake, Compass, Unlink2,
   ShieldOff, Edit, EyeOff, Users, UserCheck as UserCheckIcon, Search, 
@@ -18,10 +18,12 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 interface SituationCanvasProps {
-  userSituation: string;
-  setUserSituation: Dispatch<SetStateAction<string>>;
-  onSubmit: () => void;
-  isLoading: boolean;
+  lang?: Locale;
+  t: (key: string) => string;
+  situation: string;
+  setSituation: Dispatch<SetStateAction<string>>;
+  isSubmitting: boolean;
+  handleSubmit: (e: FormEvent) => Promise<void>;
 }
 
 interface SampleSituation {
@@ -102,122 +104,37 @@ const categorizedSampleSituations: CategorizedSampleSituations[] = [
   }
 ];
 
-
-const SituationCanvasComponent = ({ userSituation, setUserSituation, onSubmit, isLoading }: SituationCanvasProps) => {
-  const handleSampleClick = (text: string) => {
-    setUserSituation(text);
-    const textarea = document.getElementById("userSituationTextarea");
-    if (textarea) {
-        textarea.focus();
-    }
-  };
-
+export function SituationCanvas({ t, situation, setSituation, isSubmitting, handleSubmit }: SituationCanvasProps) {
   return (
-    <Card className="w-full max-w-3xl mx-auto shadow-card-calm bg-card/85 backdrop-blur-md border border-primary/10 hover:border-primary/20 transition-all duration-300 ease-out hover:shadow-card-calm-hover animate-fade-in-up">
-      <CardHeader className="text-center px-6 md:px-8 pt-6 md:pt-8 pb-3 md:pb-4">
-        <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-semibold text-primary tracking-tight">
-          Describe Your Situation
-        </CardTitle>
-        <CardDescription className="text-base md:text-lg text-muted-foreground mt-2.5">
-          Share your challenge or choose a common theme below to begin your journey.
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4 px-6 md:px-8 pt-3 md:pt-4 pb-6 md:pb-8">
-        <div className="relative">
-          <Label htmlFor="userSituationTextarea" className="text-lg font-medium text-foreground mb-1 block">
-            In your own words:
-          </Label>
-          <Textarea
-            id="userSituationTextarea"
-            placeholder="For example: I feel torn between my career ambitions and my family's expectations..."
-            value={userSituation}
-            onChange={(e) => setUserSituation(e.target.value)}
-            rows={4}
-            className="text-base pr-10 resize-y min-h-[100px] bg-background/70 dark:bg-background/40 focus:bg-card shadow-md"
-            disabled={isLoading}
-          />
-          {userSituation && !isLoading && (
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute top-[34px] right-2 h-8 w-8 text-muted-foreground hover:text-destructive transition-colors"
-              onClick={() => setUserSituation('')}
-              aria-label="Clear text"
-              title="Clear text"
-            >
-              <XCircle className="h-5 w-5" />
-            </Button>
-          )}
+    <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-2xl mx-auto p-4">
+      <div className="space-y-2">
+        <Label htmlFor="situation">{t('guidance.situation.title')}</Label>
+        <div className="text-sm text-muted-foreground">
+          {t('guidance.situation.description')}
         </div>
-
-        <div>
-          <h3 className="text-md font-medium text-foreground/80 mb-4 text-center sm:text-left">
-            Or select an inspired theme from a category:
-          </h3>
-          <Accordion type="multiple" className="w-full space-y-3">
-            {categorizedSampleSituations.map((categoryGroup) => (
-              <AccordionItem value={categoryGroup.categoryId} key={categoryGroup.categoryId} className="border border-border/60 rounded-lg bg-muted/30 hover:border-primary/20 transition-colors data-[state=open]:bg-card/50 data-[state=open]:shadow-md">
-                <AccordionTrigger className="group text-base font-medium hover:no-underline px-4 py-3 text-primary hover:text-accent data-[state=open]:text-accent data-[state=open]:border-b data-[state=open]:border-border/60">
-                  {React.createElement(categoryGroup.icon, { className: "mr-3 h-5 w-5 text-primary opacity-70 transition-all duration-300 group-hover:scale-110 group-hover:text-accent group-hover:opacity-100 group-data-[state=open]:text-accent group-data-[state=open]:animate-icon-subtle-pulse" })}
-                  <span className="flex-1 text-left">{categoryGroup.category}</span>
-                </AccordionTrigger>
-                <AccordionContent className="p-4 pt-2">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {categoryGroup.themes.map((sample) => (
-                      <Button
-                        key={sample.id}
-                        variant="ghost"
-                        onClick={() => handleSampleClick(sample.text)}
-                        disabled={isLoading}
-                        className={cn(
-                          "text-left h-auto py-2.5 px-3 rounded-full group", 
-                          "bg-muted/70 dark:bg-secondary/50 hover:bg-accent/20 dark:hover:bg-accent/30",
-                          "border border-border/50 hover:border-accent/60 dark:border-border/40 dark:hover:border-accent/50",
-                          "text-foreground/80 hover:text-accent-foreground dark:text-foreground/70 dark:hover:text-accent-foreground",
-                          "font-medium text-sm", 
-                          "transition-all duration-200 ease-out",
-                          "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-                          "whitespace-normal break-words flex items-center justify-start shadow-sm hover:shadow-md"
-                        )}
-                        title={sample.label}
-                      >
-                        {sample.icon && React.createElement(sample.icon, { className: "mr-2 h-4 w-4 shrink-0 text-current opacity-70 group-hover:opacity-100 group-hover:text-accent transition-all duration-200" })}
-                        <span className="truncate">{sample.label}</span>
-                      </Button>
-                    ))}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-        
-        <Button
-          onClick={onSubmit}
-          disabled={isLoading || userSituation.trim() === ''}
-          className="w-full text-lg py-6 shadow-lg hover:shadow-xl transform hover:scale-[1.01] transition-all duration-200 ease-out bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground"
-          size="lg"
-        >
-          {isLoading ? (
-            <>
-              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-              Revealing Your Path...
-            </>
-          ) : (
-            <>
-              <Wand2 className="mr-2 h-5 w-5" />
-              Unveil Guidance
-            </>
-          )}
-        </Button>
-      </CardContent>
-    </Card>
+        <Textarea
+          id="situation"
+          value={situation}
+          onChange={(e) => setSituation(e.target.value)}
+          placeholder={t('guidance.situation.placeholder')}
+          className="min-h-[200px]"
+        />
+      </div>
+      <Button type="submit" disabled={isSubmitting}>
+        {isSubmitting ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            {t('guidance.situation.submitting')}
+          </>
+        ) : (
+          t('guidance.situation.submit')
+        )}
+      </Button>
+    </form>
   );
 }
-SituationCanvasComponent.displayName = 'SituationCanvasComponent';
-export const SituationCanvas = React.memo(SituationCanvasComponent);
-    
 
-    
+
+
 
 

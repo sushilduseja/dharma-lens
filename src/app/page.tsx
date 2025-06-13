@@ -20,6 +20,8 @@ export interface ShlokaDetails {
   sanskrit: string;
   english: string;
   hindi: string;
+  punjabi?: string;
+  bhojpuri?: string;
 }
 
 const AppHeader = React.memo(() => (

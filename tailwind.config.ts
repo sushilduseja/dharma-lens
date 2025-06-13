@@ -16,12 +16,12 @@ export default {
         "2xl": "1400px",
       },
     },
-    extend: {
-      fontFamily: {
+    extend: {      fontFamily: {
         body: ['Literata', 'serif'],
         headline: ['Literata', 'serif'], 
         code: ['monospace'],
-        devanagari: ['Noto Sans Devanagari', 'Literata', 'serif'], 
+        devanagari: ['Noto Sans Devanagari', 'Literata', 'serif'],
+        gurmukhi: ['Noto Sans Gurmukhi', 'Literata', 'serif'],
       },
       colors: {
         background: 'hsl(var(--background))',

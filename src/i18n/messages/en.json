@@ -1,0 +1,45 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "settings": "Settings"
+  },
+  "navigation": {
+    "back": "Explore Another Situation"
+  },
+  "guidance": {
+    "header": {
+      "title": "Divya Drishti",
+      "description": "Personalized spiritual insight and guidance from Divine Vision."
+    },
+    "situation": {
+      "title": "Tell me about your current situation or challenge",
+      "placeholder": "I'm seeking guidance about...",
+      "themesTitle": "Or select an inspired theme from a category:",
+      "submit": "Unveil Guidance",
+      "processing": "Revealing Your Path...",
+      "clear": "Clear text"
+    },
+    "sections": {
+      "shloka": {
+        "sanskrit": "Sanskrit Verse:",
+        "english": "English Translation:",
+        "hindi": "Hindi Translation:",
+        "punjabi": "Punjabi Translation:",
+        "bhojpuri": "Bhojpuri Translation:"
+      },
+      "insight": {
+        "title": "Personalized Insight for You",
+        "description": "AI-generated insight connecting the pattern to your situation."
+      },
+      "guidance": {
+        "title": "Dharmic Guidance",
+        "description": "Wisdom from ancient traditions applied to modern life."
+      }
+    }
+  },
+  "errors": {
+    "generic": "Encountered an Obstacle",
+    "loading": "Gathering Ancient Wisdom..."
+  }
+}
