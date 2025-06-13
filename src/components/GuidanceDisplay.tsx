@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from 'react';
@@ -31,13 +30,12 @@ const SectionCardComponent: React.FC<SectionCardProps> = ({ title, icon, childre
   <Card className={cn(
     "shadow-card-calm transition-all duration-300 ease-out hover:shadow-card-calm-hover bg-card/90 backdrop-blur-sm border border-primary/10 hover:border-primary/20 flex flex-col group",
     cardClassName
-  )}>
-    <CardHeader className="p-4 md:p-5">
+  )}>    <CardHeader className="p-4 md:p-5">
       <CardTitle className={cn("flex items-center text-xl md:text-2xl font-semibold text-primary tracking-tight", titleClassName)}>
         {icon && <span className="mr-3 text-accent opacity-80 transition-all duration-300 group-hover:scale-110 group-hover:opacity-100">{icon}</span>}
         {title}
       </CardTitle>
-      {description && <CardDescription className="mt-1.5 text-sm md:text-base text-muted-foreground italic">{description}</CardDescription>}
+      {description && <CardDescription className="mt-1.5 text-sm md:text-base text-primary-foreground/70 italic">{description}</CardDescription>}
     </CardHeader>
     {children && (
       <CardContent className={cn("p-4 md:p-5 pt-0 text-base md:text-lg leading-relaxed text-card-foreground flex-grow", contentClassName)}>
@@ -69,7 +67,7 @@ const GuidanceDisplayComponent = ({ pattern, personalizedInsight, enhancedGuidan
             <Sparkles size={32} className="mr-3 text-accent animate-subtle-glow-pulse" />
             {pattern.pattern_name}
           </CardTitle>
-           <CardDescription className="mt-2 text-base md:text-lg text-muted-foreground">Identified Archetypal Pattern</CardDescription>
+           <CardDescription className="mt-2 text-base md:text-lg text-primary-foreground/70">Identified Archetypal Pattern</CardDescription>
         </CardHeader>
       </Card>
       
@@ -119,26 +117,27 @@ const GuidanceDisplayComponent = ({ pattern, personalizedInsight, enhancedGuidan
             icon={<BookOpenText size={24} />} 
             description="A specially selected verse offering deeper insight."
             cardClassName={cn(
-                hasModernContext ? "md:col-span-1" : "md:col-span-2"
+                hasModernContext ? "md:col-span-1" : "md:col-span-2",
+                "!bg-gradient-to-br from-primary/5 via-card/95 to-card/90 backdrop-blur-sm"
             )}
             contentClassName="space-y-3 md:space-y-4"
           >
             {shlokaDetails!.sanskrit && (
               <div>
                 <h4 className="font-semibold text-lg md:text-xl mb-1 text-accent">Sanskrit Verse (संस्कृत श्लोक):</h4>
-                <p className="text-xl md:text-2xl font-devanagari text-foreground/90" lang={shlokaDetails!.sanskrit.match(/[\u0900-\u097F]/) ? "sa" : "en"}>{shlokaDetails!.sanskrit}</p>
+                <p className="text-xl md:text-2xl font-devanagari text-primary-foreground/95" lang={shlokaDetails!.sanskrit.match(/[\u0900-\u097F]/) ? "sa" : "en"}>{shlokaDetails!.sanskrit}</p>
               </div>
             )}
             {shlokaDetails!.english && (
               <div>
                 <h4 className="font-semibold text-lg md:text-xl mb-1 text-accent">English Translation:</h4>
-                <p className="text-foreground/80">{shlokaDetails!.english}</p>
+                <p className="text-[1.05rem] leading-relaxed text-primary-foreground/95">{shlokaDetails!.english}</p>
               </div>
             )}
             {shlokaDetails!.hindi && (
               <div>
                 <h4 className="font-semibold text-lg md:text-xl mb-1 text-accent">Hindi Translation (हिन्दी अनुवाद):</h4>
-                <p className="font-devanagari text-foreground/90" lang="hi">{shlokaDetails!.hindi}</p>
+                <p className="font-devanagari text-[1.05rem] leading-relaxed text-primary-foreground/95" lang="hi">{shlokaDetails!.hindi}</p>
               </div>
             )}
           </SectionCard>
@@ -160,14 +159,14 @@ const GuidanceDisplayComponent = ({ pattern, personalizedInsight, enhancedGuidan
             title="Actionable Dharmic Guidance" 
             icon={<ListChecks size={24} />}
             description="Practical steps and reflections. AI-enhanced steps are marked."
-            cardClassName="md:col-span-1 !border-primary/20 !border-2 !shadow-md !shadow-primary/10 hover:!shadow-card-hover"
+            cardClassName="md:col-span-1 !border-primary/20 !border-2 !shadow-md !shadow-primary/10 hover:!shadow-card-hover !bg-gradient-to-br from-primary/5 via-card/95 to-card/90 backdrop-blur-sm"
           >
-            <ul className="list-disc pl-5 space-y-2.5 text-foreground/90">
+            <ul className="list-disc pl-5 space-y-2.5">
               {enhancedGuidance && enhancedGuidance.map((item, index) => (
-                <li key={`ai-guidance-${index}`} className="leading-snug">{item} <span className="text-xs text-muted-foreground/80">(AI-enhanced)</span></li>
+                <li key={`ai-guidance-${index}`} className="leading-relaxed text-[1.05rem] text-primary-foreground/95">{item} <span className="text-xs text-accent/90">(AI-enhanced)</span></li>
               ))}
               {pattern.dharmic_guidance && pattern.dharmic_guidance.map((item, index) => (
-                <li key={`pattern-guidance-${index}`} className="text-foreground/80 leading-snug">{item} <span className="text-xs text-muted-foreground/70">(from core pattern)</span></li>
+                <li key={`pattern-guidance-${index}`} className="leading-relaxed text-[1.05rem] text-primary-foreground/90">{item} <span className="text-xs text-accent/80">(from core pattern)</span></li>
               ))}
             </ul>
           </SectionCard>

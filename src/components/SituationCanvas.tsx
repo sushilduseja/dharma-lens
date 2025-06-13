@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { type Dispatch, type SetStateAction, type ElementType } from 'react';
@@ -113,27 +112,36 @@ const SituationCanvasComponent = ({ userSituation, setUserSituation, onSubmit, i
   };
 
   return (
-    <Card className="w-full max-w-3xl mx-auto shadow-card-calm bg-card/85 backdrop-blur-md border border-primary/10 hover:border-primary/20 transition-all duration-300 ease-out hover:shadow-card-calm-hover animate-fade-in-up">
+    <Card className="w-full max-w-3xl mx-auto bg-card/60 backdrop-blur-xl border border-primary/20 
+                     hover:border-primary/30 transition-all duration-300 ease-out 
+                     shadow-[0_0_15px_rgba(255,16,240,0.1)] 
+                     hover:shadow-[0_0_30px_rgba(255,16,240,0.15)] 
+                     animate-fade-in-up">
       <CardHeader className="text-center px-6 md:px-8 pt-6 md:pt-8 pb-3 md:pb-4">
-        <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-semibold text-primary tracking-tight">
+        <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-semibold 
+                             bg-gradient-to-r from-[#ff10f0] via-[#2d00f7] to-[#00ff9d] 
+                             bg-clip-text text-transparent 
+                             tracking-tight">
           Describe Your Situation
         </CardTitle>
-        <CardDescription className="text-base md:text-lg text-muted-foreground mt-2.5">
+        <CardDescription className="text-base md:text-lg text-accent/90 mt-2.5">
           Share your challenge or choose a common theme below to begin your journey.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4 px-6 md:px-8 pt-3 md:pt-4 pb-6 md:pb-8">
-        <div className="relative">
-          <Label htmlFor="userSituationTextarea" className="text-lg font-medium text-foreground mb-1 block">
+        <div className="relative">          <Label htmlFor="userSituationTextarea" className="text-lg font-medium bg-gradient-to-r from-[#ff10f0] to-[#00ff9d] bg-clip-text text-transparent mb-2 block">
             In your own words:
-          </Label>
-          <Textarea
+          </Label>          <Textarea
             id="userSituationTextarea"
             placeholder="For example: I feel torn between my career ambitions and my family's expectations..."
             value={userSituation}
             onChange={(e) => setUserSituation(e.target.value)}
-            rows={4}
-            className="text-base pr-10 resize-y min-h-[100px] bg-background/70 dark:bg-background/40 focus:bg-card shadow-md"
+            rows={4}            className="text-base pr-10 resize-y min-h-[120px] bg-card/90 backdrop-blur-sm text-white border-primary/40 
+            placeholder:text-white/50 focus:placeholder:text-white/70
+            focus:border-[#ff10f0] focus:ring-[#ff10f0]/20 
+            shadow-[0_0_15px_rgba(255,16,240,0.1)] hover:shadow-[0_0_20px_rgba(255,16,240,0.15)]
+            focus:shadow-[0_0_25px_rgba(255,16,240,0.2)] focus:bg-card/95
+            transition-all duration-300"
             disabled={isLoading}
           />
           {userSituation && !isLoading && (
@@ -150,18 +158,17 @@ const SituationCanvasComponent = ({ userSituation, setUserSituation, onSubmit, i
           )}
         </div>
 
-        <div>
-          <h3 className="text-md font-medium text-foreground/80 mb-4 text-center sm:text-left">
+        <div>          <h3 className="text-lg font-medium mb-4 text-center sm:text-left bg-gradient-to-r from-[#ff10f0] via-[#9000ff] to-[#00ff9d] bg-clip-text text-transparent hover:opacity-90 transition-opacity">
             Or select an inspired theme from a category:
           </h3>
           <Accordion type="multiple" className="w-full space-y-3">
             {categorizedSampleSituations.map((categoryGroup) => (
-              <AccordionItem value={categoryGroup.categoryId} key={categoryGroup.categoryId} className="border border-border/60 rounded-lg bg-muted/30 hover:border-primary/20 transition-colors data-[state=open]:bg-card/50 data-[state=open]:shadow-md">
-                <AccordionTrigger className="group text-base font-medium hover:no-underline px-4 py-3 text-primary hover:text-accent data-[state=open]:text-accent data-[state=open]:border-b data-[state=open]:border-border/60">
-                  {React.createElement(categoryGroup.icon, { className: "mr-3 h-5 w-5 text-primary opacity-70 transition-all duration-300 group-hover:scale-110 group-hover:text-accent group-hover:opacity-100 group-data-[state=open]:text-accent group-data-[state=open]:animate-icon-subtle-pulse" })}
+              <AccordionItem value={categoryGroup.categoryId} key={categoryGroup.categoryId} className="border border-border/60 rounded-lg bg-muted/60 hover:border-primary/30 transition-colors data-[state=open]:bg-card/80 data-[state=open]:shadow-md">
+                <AccordionTrigger className="group text-base font-medium hover:no-underline px-4 py-3 text-primary-foreground/90 hover:text-accent data-[state=open]:text-accent data-[state=open]:border-b data-[state=open]:border-border/60">
+                  {React.createElement(categoryGroup.icon, { className: "mr-3 h-5 w-5 text-accent opacity-80 transition-all duration-300 group-hover:scale-110 group-hover:opacity-100 group-data-[state=open]:animate-icon-subtle-pulse" })}
                   <span className="flex-1 text-left">{categoryGroup.category}</span>
                 </AccordionTrigger>
-                <AccordionContent className="p-4 pt-2">
+                <AccordionContent className="p-4 pt-2 bg-card/40 backdrop-blur-sm rounded-b-lg">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {categoryGroup.themes.map((sample) => (
                       <Button
@@ -171,9 +178,9 @@ const SituationCanvasComponent = ({ userSituation, setUserSituation, onSubmit, i
                         disabled={isLoading}
                         className={cn(
                           "text-left h-auto py-2.5 px-3 rounded-full group", 
-                          "bg-muted/70 dark:bg-secondary/50 hover:bg-accent/20 dark:hover:bg-accent/30",
-                          "border border-border/50 hover:border-accent/60 dark:border-border/40 dark:hover:border-accent/50",
-                          "text-foreground/80 hover:text-accent-foreground dark:text-foreground/70 dark:hover:text-accent-foreground",
+                          "bg-muted/90 hover:bg-accent/40",
+                          "border border-primary/30 hover:border-accent/70",
+                          "text-primary-foreground/90 hover:text-accent-foreground",
                           "font-medium text-sm", 
                           "transition-all duration-200 ease-out",
                           "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
@@ -181,8 +188,8 @@ const SituationCanvasComponent = ({ userSituation, setUserSituation, onSubmit, i
                         )}
                         title={sample.label}
                       >
-                        {sample.icon && React.createElement(sample.icon, { className: "mr-2 h-4 w-4 shrink-0 text-current opacity-70 group-hover:opacity-100 group-hover:text-accent transition-all duration-200" })}
-                        <span className="truncate">{sample.label}</span>
+                        {sample.icon && React.createElement(sample.icon, { className: "mr-2 h-4 w-4 shrink-0 text-accent opacity-80 group-hover:opacity-100 group-hover:text-accent transition-all duration-200" })}
+                        <span className="truncate text-primary-foreground/90 group-hover:text-accent-foreground">{sample.label}</span>
                       </Button>
                     ))}
                   </div>
@@ -191,11 +198,10 @@ const SituationCanvasComponent = ({ userSituation, setUserSituation, onSubmit, i
             ))}
           </Accordion>
         </div>
-        
-        <Button
+          <Button
           onClick={onSubmit}
           disabled={isLoading || userSituation.trim() === ''}
-          className="w-full text-lg py-6 shadow-lg hover:shadow-xl transform hover:scale-[1.01] transition-all duration-200 ease-out bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground"
+          className="w-full text-lg py-6 transform hover:scale-[1.02] transition-all duration-300 ease-out bg-gradient-to-r from-[#ff10f0] via-[#9000ff] to-[#00ff9d] hover:from-[#ff10f0]/90 hover:via-[#9000ff]/90 hover:to-[#00ff9d]/90 text-white font-medium cosmic-pulse"
           size="lg"
         >
           {isLoading ? (
@@ -216,8 +222,8 @@ const SituationCanvasComponent = ({ userSituation, setUserSituation, onSubmit, i
 }
 SituationCanvasComponent.displayName = 'SituationCanvasComponent';
 export const SituationCanvas = React.memo(SituationCanvasComponent);
-    
 
-    
+
+
 
 

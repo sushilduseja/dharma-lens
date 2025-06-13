@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useCallback } from 'react';
@@ -28,14 +27,15 @@ const allPatternsStatic: Pattern[] = patternsImport?.patterns || [];
 const AppHeader = React.memo(() => (
   <header className="py-6 md:py-10 text-center relative z-10 bg-transparent mb-0">
     <h1 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-headline font-bold tracking-tight
-                   text-primary-foreground
-                   bg-gradient-to-r from-primary via-accent to-primary
-                   animate-shimmer bg-[length:200%_auto]
-                   drop-shadow-[0_3px_4px_hsl(var(--primary)/0.3)]
-                   px-6 py-3 rounded-lg">
+                   bg-gradient-to-r from-[#ff10f0] via-[#2d00f7] to-[#00ff9d]
+                   animate-shimmer bg-[length:200%_auto] bg-clip-text text-transparent
+                   drop-shadow-[0_2px_20px_rgba(255,16,240,0.3)]
+                   px-6 py-3">
       Divya Drishti
     </h1>
-    <p className="text-foreground/80 mt-3 text-base sm:text-lg md:text-xl filter drop-shadow-[0_1px_2px_hsl(var(--primary)/0.1)]">
+    <p className="text-[#00ff9d]/90 mt-3 text-base sm:text-lg md:text-xl 
+                  filter drop-shadow-[0_2px_8px_rgba(0,255,157,0.2)]
+                  font-medium">
       Find clarity through timeless wisdom.
     </p>
   </header>
@@ -43,7 +43,7 @@ const AppHeader = React.memo(() => (
 AppHeader.displayName = 'AppHeader';
 
 const AppFooter = React.memo(() => (
-   <footer className="py-6 md:py-8 mt-auto text-center text-sm text-muted-foreground relative z-10 border-t border-border/50">
+   <footer className="py-6 md:py-8 mt-auto text-center text-sm text-[#00ff9d]/70 relative z-10 border-t border-[#ff10f0]/10">
       <p>&copy; {new Date().getFullYear()} Divya Drishti. Insights for guidance and reflection.</p>
     </footer>
 ));
@@ -195,11 +195,21 @@ export default function DharmalensPage() {
       <CosmicBackground />
       <AppHeader />
       <main className="container mx-auto px-4 pt-2 pb-4 md:pt-2 md:pb-6 flex-grow relative z-10 flex flex-col items-center w-full">
-        {error && !isProcessingAI && (
-          <Alert variant="destructive" className="mb-6 max-w-2xl w-full animate-fade-in-up bg-destructive/95 text-destructive-foreground shadow-lg">
-            <Sparkles className="h-5 w-5" />
-            <AlertTitle className="text-lg">Encountered an Obstacle</AlertTitle>
-            <AlertDescription className="text-base whitespace-pre-wrap">{error}</AlertDescription>
+        {error && !isProcessingAI && (          <Alert className="mb-6 max-w-2xl w-full animate-fade-in-up border-primary/30 bg-card/95 backdrop-blur-sm shadow-[0_0_25px_rgba(255,16,240,0.1)]">
+            <Sparkles className="h-5 w-5 text-primary animate-pulse" />
+            <AlertTitle className="text-lg bg-gradient-to-r from-[#ff10f0] to-[#00ff9d] bg-clip-text text-transparent font-semibold">Seeking Inner Balance</AlertTitle>            <AlertDescription className="text-base space-y-2">
+              {error.includes("[GoogleGenerativeAI Error]") || error.includes("Failed to generate") ? (
+                <>
+                  <p className="text-white/90">Our cosmic guide is currently in deep meditation. This is a moment to practice patience.</p>
+                  <p className="text-sm text-[#00ff9d]/90">Take three deep breaths and try again in a few moments. Sometimes the wisest path reveals itself after a brief pause. 🕉️</p>
+                </>
+              ) : (
+                <>
+                  <p className="text-white/90">A temporary disturbance in the cosmic flow has occurred.</p>
+                  <p className="text-sm text-[#00ff9d]/90">Let's approach this challenge with mindful awareness. Please try your query again. 🌟</p>
+                </>
+              )}
+            </AlertDescription>
           </Alert>
         )}
 

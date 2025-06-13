@@ -73,7 +73,17 @@ export async function getDynamicGuidance(input: GenerateDynamicGuidanceInput): P
     if (error.cause) {
         console.error("Cause:", error.cause);
     }
-    throw new Error(`Failed to generate dynamic guidance. The AI counselor might be meditating. Original error: ${error.message}`);
+    // Handle specific API errors with user-friendly messages
+    const errorMessage = error.message || '';
+    if (errorMessage.includes('404 Not Found') && errorMessage.includes('models/')) {
+      throw new Error('Our spiritual AI guide is temporarily unavailable. Like the changing seasons, this too shall pass. 🍃');
+    } else if (errorMessage.includes('429')) {
+      throw new Error('The cosmic energies need a moment to realign. Please take a mindful pause before trying again. 🌟');
+    } else if (errorMessage.includes('500')) {
+      throw new Error('The universe is asking us to practice patience. Let\'s try again in a few moments. ✨');
+    } else {
+      throw new Error('A temporary disturbance in the flow of wisdom. Let\'s approach again with renewed clarity. 🕊️');
+    }
   }
 }
 
