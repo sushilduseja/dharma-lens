@@ -8,21 +8,21 @@ export interface ScripturalQuote {
 }
 
 export interface MythologicalArchetype {
-  source: string; // e.g., Mahabharata, Ramayana
-  summary: string; // Concise 2-paragraph summary
+  source?: string; // e.g., Mahabharata, Ramayana - Can be generic if purely AI generated
+  summary: string; // AI generated/personalized summary
 }
 
 export interface PhilosophicalGuidance {
-  core_concept: string; // e.g., Karma Yoga, Vairagya, Bhakti
-  explanation: string; // Practical explanation for the modern dilemma
+  core_concept?: string; // e.g., Karma Yoga, Vairagya - Can be generic if purely AI generated
+  explanation: string; // AI generated/personalized explanation
 }
 
 export interface Pattern {
   pattern_id: string; // e.g., "karmic_archetype_id"
-  pattern_name: string; // Short and evocative title
+  pattern_name: string; // Short and evocative title (can be AI generated)
   keywords_and_themes?: string[]; // Keywords describing the conflict or dilemma - Optional for dynamic patterns
-  modern_context: string; // 2-3 sentence description of the modern pattern
-  mythological_archetype?: MythologicalArchetype; // Optional for dynamic patterns
-  philosophical_guidance?: PhilosophicalGuidance; // Optional for dynamic patterns
-  dharmic_guidance: string[]; // Actionable steps or reflective questions. For dynamic patterns, this might be empty, with all guidance in 'enhancedGuidance' state.
+  modern_context: string; // 2-3 sentence description of the modern pattern (AI generated/personalized)
+  mythological_archetype?: MythologicalArchetype; // Populated by AI
+  philosophical_guidance?: PhilosophicalGuidance; // Populated by AI
+  dharmic_guidance: string[]; // Original static guidance if any, AI enhanced version in separate state.
 }

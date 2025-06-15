@@ -2,7 +2,7 @@
 import type {Config} from 'tailwindcss';
 
 export default {
-  darkMode: ['class'],
+  darkMode: ['class'], // Ensuring dark mode is class-based
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -60,23 +60,20 @@ export default {
           border: 'hsl(var(--input-border))',
         },
         ring: 'hsl(var(--ring))',
-        chart: {
-          '1': 'hsl(var(--chart-1))',
-          '2': 'hsl(var(--chart-2))',
-          '3': 'hsl(var(--chart-3))',
-          '4': 'hsl(var(--chart-4))',
-          '5': 'hsl(var(--chart-5))',
-        },
       },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
-      boxShadow: {
-        'card-calm': '0 6px 18px hsl(var(--primary) / 0.07), 0 3px 7px hsl(var(--primary) / 0.05)',
-        'card-calm-hover': '0 10px 25px hsl(var(--primary) / 0.12), 0 5px 12px hsl(var(--primary) / 0.1)',
-        'header': '0 2px 10px hsl(var(--background) / 0.5)',
+      boxShadow: { 
+        'sm': '0 1px 2px 0 hsl(var(--foreground) / 0.03)',
+        'DEFAULT': '0 1px 3px 0 hsl(var(--foreground) / 0.05), 0 1px 2px -1px hsl(var(--foreground) / 0.05)',
+        'md': '0 4px 6px -1px hsl(var(--foreground) / 0.05), 0 2px 4px -2px hsl(var(--foreground) / 0.05)',
+        'lg': '0 10px 15px -3px hsl(var(--foreground) / 0.05), 0 4px 6px -4px hsl(var(--foreground) / 0.05)',
+        'xl': '0 20px 25px -5px hsl(var(--foreground) / 0.07), 0 8px 10px -6px hsl(var(--foreground) / 0.07)',
+        '2xl': '0 25px 50px -12px hsl(var(--foreground) / 0.15)',
+        'inner': 'inset 0 2px 4px 0 hsl(var(--foreground) / 0.03)',
       },
       keyframes: {
         'accordion-down': {
@@ -95,37 +92,30 @@ export default {
             height: '0',
           },
         },
-        shimmer: {
-          '0%': { backgroundPosition: '200% center' },
-          '100%': { backgroundPosition: '-200% center' },
-        },
         'fade-in-up': {
-          '0%': { opacity: '0', transform: 'translateY(12px)' },
+          '0%': { opacity: '0', transform: 'translateY(8px)' }, 
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        subtlePulse: {
-          '0%, 100%': { opacity: '0.2', transform: 'scale(1)' },
-          '50%': { opacity: '0.5', transform: 'scale(1.02)' },
-        },
-        'subtle-glow-pulse': {
-          '0%, 100%': { opacity: '0.6', transform: 'scale(1)' },
-          '50%': { opacity: '1', transform: 'scale(1.1)' },
-        },
-        'icon-subtle-pulse': {
-          '0%, 100%': { transform: 'scale(1)', opacity: '0.7' },
-          '50%': { transform: 'scale(1.12)', opacity: '1' },
+        'subtle-pulse-keyframes': { 
+          '0%, 100%': { 
+            boxShadow: '0 0 12px hsl(var(--primary) / 0.2), 0 0 24px hsl(var(--primary) / 0.1)',
+            transform: 'scale(1)' 
+          },
+          '50%': { 
+            boxShadow: '0 0 18px hsl(var(--primary) / 0.3), 0 0 30px hsl(var(--primary) / 0.15)',
+            transform: 'scale(1.015)'
+          },
         },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        shimmer: 'shimmer 4s linear infinite', 
-        'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
-        'subtle-pulse': 'subtlePulse 8s infinite ease-in-out',
-        'subtle-glow-pulse': 'subtle-glow-pulse 3s infinite ease-in-out',
-        'icon-subtle-pulse': 'icon-subtle-pulse 2.5s infinite ease-in-out',
+        'fade-in-up': 'fade-in-up 0.4s ease-out forwards', 
+        'button-subtle-pulse': 'subtle-pulse-keyframes 3s ease-in-out infinite',
       },
     },
   },
   plugins: [require('tailwindcss-animate')],
 } satisfies Config;
+
+    

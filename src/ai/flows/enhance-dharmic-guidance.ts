@@ -34,10 +34,10 @@ export type EnhanceDharmicGuidanceInput = z.infer<typeof EnhanceDharmicGuidanceI
 const EnhanceDharmicGuidanceOutputSchema = z.object({
   enhancedGuidance: z
     .array(z.string())
-    .describe('Enhanced dharmic guidance steps tailored to the user\'s situation. Aim for 3-4 impactful steps. Each step should be a single, clear, actionable sentence, or at most two very short sentences. This should be in the targetLanguage.'),
-  sanskritShloka: z.string().optional().describe('A relevant Sanskrit shloka, PREFERABLY in Devanagari script. If Devanagari is not possible, use IAST romanization.'),
-  shlokaEnglishTranslation: z.string().optional().describe('English translation of the shloka.'),
-  shlokaHindiTranslation: z.string().optional().describe('Hindi translation of the shloka, in Devanagari script.'),
+    .describe('Enhanced dharmic guidance steps tailored to the user\'s situation. Aim for 3-4 impactful steps. Each step should be a single, clear, actionable sentence, or at most two very short sentences. This MUST be in the targetLanguage.'),
+  sanskritShloka: z.string().describe('A relevant Sanskrit shloka. This is MANDATORY. It MUST be provided, PREFERABLY in Devanagari script. If Devanagari is not possible, use IAST romanization. Find the most fitting shloka.'),
+  shlokaEnglishTranslation: z.string().describe('English translation of the shloka. This is MANDATORY.'),
+  shlokaHindiTranslation: z.string().describe('Hindi translation of the shloka, in Devanagari script. This is MANDATORY.'),
 });
 export type EnhanceDharmicGuidanceOutput = z.infer<typeof EnhanceDharmicGuidanceOutputSchema>;
 
@@ -53,34 +53,71 @@ const prompt = ai.definePrompt({
   output: {
     schema: EnhanceDharmicGuidanceOutputSchema,
   },
-  prompt: `You are a Dharmic counselor, skilled in providing practical guidance rooted in Hindu philosophical principles.
-The Hindu scriptural tradition, including the Bhagavad Gita, Upanishads, Puranas, and works of Bhakti poets, offers a vast repository of insights. The Gita emphasizes equanimity over mere endurance of suffering. The Upanishads provide wisdom for modern anxieties and cultivating compassion. The Puranas convey complex truths accessibly, revealing moral complexities and flawed divine figures, offering profound lessons about human nature and karma.
-Your role is to leverage AI to help unlock these profound teachings and provide tailored, actionable advice.
+  prompt: `You are a profound Dharmic counselor, deeply versed in the vast ocean of Hindu philosophical wisdom spanning millennia. Your expertise encompasses:
 
-The user's target language for the response is: {{{targetLanguage}}}. If no targetLanguage is specified, assume 'en' (English).
+**Core Scriptural Foundation:**
+- Vedas (Rigveda, Samaveda, Yajurveda, Atharvaveda) - the eternal wisdom
+- Upanishads (108 canonical texts) - especially Isha, Kena, Katha, Prashna, Mundaka, Mandukya, Taittiriya, Aitareya, Chandogya, Brihadaranyaka
+- Bhagavad Gita - the supreme guide for dharmic living
+- Puranas (18 Mahapuranas, 18 Upapuranas) - cosmic wisdom through divine narratives
+- Itihasas (Ramayana, Mahabharata) - dharmic exemplars in human complexity
 
-Based on the user's situation, the identified archetypal pattern, and the mythological summary, enhance the existing dharmic guidance steps.
+**Philosophical Schools (Darshanas):**
+- Advaita, Dvaita, Vishishtadvaita Vedanta
+- Sankhya, Yoga, Nyaya, Vaisheshika, Mimamsa philosophy
 
-Situation Description: {{{situationDescription}}}
-Pattern Identified: {{{patternIdentified}}}
-Mythological Summary: {{{mythologicalSummary}}}
-Current Guidance:{{#each currentGuidance}}\n - {{{this}}}{{/each}}
+**Devotional & Poetic Traditions:**
+- Bhakti poets: Kabir, Tulsidas, Surdas, Mirabai, Tukaram, Namdev, Eknath
+- Tamil saints: Alvars, Nayanars, Thiruvalluvar (Thirukkural)
+- Sufi-influenced saints: Rahim, Raskhan
+- Regional wisdom: Vemana (Telugu), Sarvajna (Kannada), Narsinh Mehta (Gujarati)
 
-Provide enhanced guidance steps that are SUPER CONCISE, PUNCHY, and TO THE POINT, in the {{{targetLanguage}}}.
-- Offer specific, practical actions in alignment with Dharma, using impactful and direct language in {{{targetLanguage}}}.
-- Promote self-awareness, ethical decision-making, and a sense of purpose with brevity, in {{{targetLanguage}}}.
-- Draw upon the depth of Hindu wisdom to address contemporary challenges, fostering equanimity and compassion.
-- Each step MUST be a single, clear, actionable sentence, or at most two very short, impactful sentences, in {{{targetLanguage}}}.
-- Aim for a total of 3-4 highly impactful guidance steps. Less, more powerful words.
+Your mastery allows you to draw from this profound repository to address the deepest human struggles with precision, compassion, and transformative power.
 
-Return the enhanced guidance steps as a numbered list.
+**Target Language:** {{{targetLanguage}}} (Default: English if unspecified)
 
-Crucially, select a Sanskrit shloka (or a verse from a Bhakti poet if more appropriate and if a Sanskrit shloka is not directly fitting) that is **highly relevant and specific** to the provided Situation Description, Pattern Identified, and Mythological Summary. **Avoid generic shlokas unless no specific one truly applies.** Strive for variety based on the unique context of the inputs. Provide this verse and its translations with the following script requirements:
-- sanskritShloka: Provide this in Devanagari script. If, for any reason, Devanagari script is not possible for the shloka, or if the verse is from a Bhakti poet in a different script, provide it in IAST (International Alphabet of Sanskrit Transliteration) format or its original script if appropriate (e.g., Hindi for a Kabir doha).
-- shlokaEnglishTranslation: Provide a clear English translation. This field MUST be in English.
-- shlokaHindiTranslation: Provide this in Devanagari script (for Hindi verses or as a translation for Sanskrit). This field MUST be in Hindi.
-  
-Ensure the 'enhancedGuidance' field in the output is in {{{targetLanguage}}}.
+**Current Context:**
+Situation: {{{situationDescription}}}
+Archetypal Pattern: {{{patternIdentified}}}
+Mythological Foundation: {{{mythologicalSummary}}}
+Existing Guidance: {{#each currentGuidance}}\n - {{{this}}}{{/each}}
+
+**Your Mission:**
+Transform the existing guidance into laser-focused, transformative dharmic steps that cut through confusion and ignite purposeful action.
+
+**Enhanced Guidance Requirements:**
+- Each step must be a surgical strike of wisdom - one powerful sentence maximum (in {{{targetLanguage}}})
+- Use active, commanding language that inspires immediate action (in {{{targetLanguage}}})
+- Root every suggestion in authentic dharmic principles, not generic advice
+- Address the specific nuances of their archetypal pattern
+- Progress from inner awareness → ethical action → sustainable transformation
+- Total: 3-4 steps that create a complete transformation pathway
+
+**Sacred Verse Selection (MANDATORY REQUIREMENT):**
+You MUST provide a relevant Sanskrit shloka, its English translation, and its Hindi translation. This is a non-negotiable part of the response. Choose a Sanskrit shloka or devotional verse with laser precision.
+
+**Priority Sources (in order of preference for specific situations):**
+1. **Bhagavad Gita** - for dharmic dilemmas, duty conflicts, spiritual confusion
+2. **Upanishads** - for existential questions, self-realization, anxiety
+3. **Ramayana/Mahabharata** - for relationship conflicts, moral complexities
+4. **Puranic verses** - for life transitions, devotional crises
+5. **Bhakti poetry** - for emotional struggles, devotional practices, surrender
+6. **Thirukkural** - for ethical business, practical wisdom
+7. **Regional saints** - for cultural/social conflicts, simple living
+
+**Verse Requirements:**
+- Must be hyper-relevant to the SPECIFIC situation, not generic
+- Avoid overused verses (like BG 2.47) unless perfectly fitting
+- Prefer lesser-known but deeply applicable verses
+- For Bhakti poetry, include original script when possible
+
+**Output Format:**
+- enhancedGuidance: In {{{targetLanguage}}}
+- sanskritShloka: MANDATORY. Devanagari script (or original script for non-Sanskrit).
+- shlokaEnglishTranslation: MANDATORY. Clear, poetic English (ALWAYS English).
+- shlokaHindiTranslation: MANDATORY. Devanagari Hindi (ALWAYS Hindi).
+
+Respond with enhanced guidance in {{{targetLanguage}}} and appropriately sourced, MANDATORY sacred wisdom.
   `, config: {
     safetySettings: [
       {
@@ -111,6 +148,18 @@ const enhanceDharmicGuidanceFlow = ai.defineFlow(
   },
   async input => {
     const {output} = await prompt({...input, targetLanguage: input.targetLanguage || 'en'});
+    if (!output || !output.sanskritShloka || !output.shlokaEnglishTranslation || !output.shlokaHindiTranslation) {
+      console.error("AI failed to provide mandatory shloka details for enhanced guidance. User situation:", input.situationDescription, "Pattern:", input.patternIdentified);
+      // Ensure a fallback or error is explicitly handled if AI misses mandatory fields despite prompt.
+      // For now, we'll return the output, but strict validation or error throwing might be needed.
+      return {
+        enhancedGuidance: output?.enhancedGuidance || ["Guidance is being contemplated."],
+        sanskritShloka: "सन्तुष्टः सततं योगी यतात्मा दृढनिश्चयः। मय्यर्पितमनोबुद्धिर्यो मद्भक्तः स मे प्रियः॥", // Default fallback Gita 12.14
+        shlokaEnglishTranslation: "The yogi who is ever content, self-controlled, resolute, with mind and intellect dedicated to Me—that devotee of Mine is dear to Me.",
+        shlokaHindiTranslation: "जो योगी निरन्तर सन्तुष्ट रहता है, जिसने मन और इन्द्रियों सहित शरीर को वश में कर लिया है और दृढ़ निश्चय वाला है - वह अपने मन और बुद्धि को मुझमें अर्पित किये हुए मेरा भक्त मुझे प्रिय है।",
+        ...output // Spread output to include whatever AI did provide
+      };
+    }
     return output!;
   }
 );

@@ -2,7 +2,7 @@
 'use client';
 
 import React, { useState, useCallback, Suspense, useRef, useEffect } from 'react';
-import { Sparkles, Loader2, Wand2, ChevronDown } from 'lucide-react';
+import { Sparkles, Loader2, ChevronDown } from 'lucide-react'; 
 import type { Pattern, MythologicalArchetype, PhilosophicalGuidance } from '@/types/dharmic';
 import { findBestMatch } from '@/lib/patternMatcher';
 import { getDynamicGuidance } from '@/app/actions'; // Removed getPersonalizedInsight, getEnhancedGuidance
@@ -13,6 +13,7 @@ import { SituationCanvas } from '@/components/SituationCanvas';
 import { GuidanceDisplay } from '@/components/GuidanceDisplay';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
+import { useLocale, useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import { cn } from '@/lib/utils';
 
@@ -20,7 +21,6 @@ const CosmicBackground = dynamic(() =>
   import('@/components/CosmicBackground').then(mod => mod.CosmicBackground), 
   { ssr: false, loading: () => <div className="fixed inset-0 bg-background -z-10" /> }
 );
-
 
 export interface ShlokaDetails {
   sanskrit: string;
@@ -30,26 +30,38 @@ export interface ShlokaDetails {
 
 const allPatternsStatic: Pattern[] = patternsImport?.patterns || [];
 
-const AppHeaderContent = React.memo(() => (
-  <>
-    <h1 className="page-title-hero">
-      Divya Drishti
-    </h1>
-    <p className="page-subtitle-hero text-base sm:text-lg md:text-xl">
-      Find clarity through timeless wisdom.
-    </p>
-  </>
-));
+const AppHeaderContent = React.memo(() => {
+  const t = useTranslations('AppHeader');
+  return (
+    <>
+      <h1 className="page-title-hero">
+        {t('title')}
+      </h1>
+      <p className="page-subtitle-hero text-base sm:text-lg md:text-xl">
+        {t('subtitle1')}
+      </p>
+    </>
+  );
+});
 AppHeaderContent.displayName = 'AppHeaderContent';
 
-const AppFooter = React.memo(() => (
-   <footer className="py-4 text-center text-xs text-muted-foreground border-t border-border/50">
-      <p>&copy; {new Date().getFullYear()} Divya Drishti. Insights for guidance and reflection.</p>
+const AppFooter = React.memo(() => {
+  const t = useTranslations('AppFooter');
+  return (
+    <footer className="py-4 text-center text-xs text-muted-foreground border-t border-border/50">
+      <p>&copy; {new Date().getFullYear()} {t('copyright')}</p>
     </footer>
-));
+  );
+});
 AppFooter.displayName = 'AppFooter';
 
 export default function DharmalensPage() {
+  const locale = useLocale();
+  const tAppHeader = useTranslations('AppHeader');
+  const tPage = useTranslations('DharmalensPage');
+  const tToast = useTranslations('ToastMessages');
+  const tScrollIndicator = useTranslations('ScrollIndicator');
+
   const [userSituation, setUserSituation] = useState<string>('');
   const [currentMatch, setCurrentMatch] = useState<Pattern | null>(null);
   // personalizedInsight is now part of currentMatch.modern_context
@@ -59,14 +71,13 @@ export default function DharmalensPage() {
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
   const [showGuidance, setShowGuidance] = useState<boolean>(false);
-  const [isDynamicPatternFlag, setIsDynamicPatternFlag] = useState<boolean>(false); // Renamed
+  const [isDynamicPatternFlag, setIsDynamicPatternFlag] = useState<boolean>(false); // Renamed to avoid conflict
   const [showScrollButton, setShowScrollButton] = useState<boolean>(false);
   const guidanceSectionRef = useRef<HTMLElement>(null);
 
-
   useEffect(() => {
     if (showGuidance) {
-      if (guidanceSectionRef.current) {
+       if (guidanceSectionRef.current) {
          const rect = guidanceSectionRef.current.getBoundingClientRect();
          if (rect.top > window.innerHeight || rect.bottom < 0) {
             setShowScrollButton(true);
@@ -79,7 +90,7 @@ export default function DharmalensPage() {
         ([entry]) => {
           setShowScrollButton(!entry.isIntersecting);
         },
-        { root: null, rootMargin: '0px', threshold: 0.1 } 
+        { root: null, rootMargin: '0px', threshold: 0.1 }
       );
 
       const currentGuidanceSection = guidanceSectionRef.current;
@@ -112,8 +123,8 @@ export default function DharmalensPage() {
 
   const handleSubmit = useCallback(async () => {
     if (!userSituation.trim()) {
-      setError("Please describe your situation before proceeding.");
-      toast({ title: "Input Required", description: "Please describe your situation.", variant: "destructive" });
+      setError(tPage('errorInputRequired'));
+      toast({ title: tToast('titleInputRequired'), description: tToast('descInputRequired'), variant: "destructive" });
       return;
     }
     setIsProcessingAI(true);
@@ -122,12 +133,12 @@ export default function DharmalensPage() {
     setEnhancedGuidance(null);
     setShlokaDetails(null);
     setIsDynamicPatternFlag(false);
-    
+
     if (!allPatternsStatic || allPatternsStatic.length === 0) {
-      const errorMsg = "Error: Imported patterns data is empty or invalid. Please check src/data/patterns.json.";
+      const errorMsg = tPage('errorPatternsNotLoaded', { filePath: 'src/data/patterns.json'});
       setError(errorMsg);
       toast({
-        title: "Patterns Data Error",
+        title: tToast('titlePatternsError'),
         description: errorMsg,
         variant: "destructive",
       });
@@ -141,42 +152,44 @@ export default function DharmalensPage() {
     try {
       const guidanceInput: GenerateDynamicGuidanceInput = {
         userSituation,
-        targetLanguage: 'en', // Defaulting to 'en' for the non-localized page
+        targetLanguage: locale,
         matchedPatternName: bestMatch?.pattern_name,
-        matchedPatternMythologicalSummary: bestMatch?.mythological_archetype?.summary,
-        matchedPatternPhilosophicalConcept: bestMatch?.philosophical_guidance?.core_concept,
-        matchedPatternInitialGuidance: bestMatch?.dharmic_guidance,
+        // Ensure translations are used if available for matched pattern context
+        matchedPatternMythologicalSummary: bestMatch?.translations?.[locale]?.mythological_summary || bestMatch?.mythological_archetype?.summary,
+        matchedPatternPhilosophicalConcept: bestMatch?.translations?.[locale]?.philosophical_concept || bestMatch?.philosophical_guidance?.core_concept,
+        matchedPatternInitialGuidance: bestMatch?.translations?.[locale]?.dharmic_guidance || bestMatch?.dharmic_guidance,
       };
 
       if (bestMatch) {
         setIsDynamicPatternFlag(false);
-         toast({
-          title: "Guidance Revealed!",
-          description: `Pattern: ${bestMatch.pattern_name}`,
+        toast({
+          title: tToast('titleGuidanceRevealed'),
+          description: tToast('descPatternMatched', { patternName: bestMatch.translations?.[locale]?.pattern_name || bestMatch.pattern_name }),
         });
-      } else { 
+      } else {
         setIsDynamicPatternFlag(true);
         toast({
-          title: "Seeking Deeper Wisdom...",
-          description: "Crafting personalized guidance for your unique situation.",
+          title: tToast('titleSeekingDeeperWisdom'),
+          description: tToast('descCraftingPersonalizedGuidance'),
         });
       }
       
       dynamicGuidanceResult = await getDynamicGuidance(guidanceInput);
-      
+
       const displayPattern: Pattern = {
         pattern_id: bestMatch ? bestMatch.pattern_id : `dynamic-${Date.now()}`,
         pattern_name: dynamicGuidanceResult.generated_pattern_name,
         modern_context: dynamicGuidanceResult.generated_modern_context_and_insight,
         mythological_archetype: {
-          source: bestMatch?.mythological_archetype?.source,
+          source: bestMatch?.mythological_archetype?.source, // Source can be optional
           summary: dynamicGuidanceResult.generated_mythological_summary,
-        } as MythologicalArchetype,
+        } as MythologicalArchetype, // Cast to ensure type correctness
         philosophical_guidance: {
-          core_concept: bestMatch?.philosophical_guidance?.core_concept,
+          core_concept: bestMatch?.philosophical_guidance?.core_concept, // Concept can be optional
           explanation: dynamicGuidanceResult.generated_philosophical_explanation,
-        } as PhilosophicalGuidance,
+        } as PhilosophicalGuidance, // Cast to ensure type correctness
         dharmic_guidance: bestMatch?.dharmic_guidance || [], // Static guidance, AI version in enhancedGuidance
+        translations: bestMatch?.translations, // Preserve original translations if any
       };
       
       setCurrentMatch(displayPattern);
@@ -189,32 +202,35 @@ export default function DharmalensPage() {
           hindi: dynamicGuidanceResult.shlokaHindiTranslation || '',
         });
       } else {
-        setShlokaDetails(null); 
+        setShlokaDetails(null);
       }
-
-      if(!bestMatch) { // Only show this toast if it was a dynamic generation from the start
+      
+      // Toast after AI processing is complete
+      if(bestMatch) {
+         // Already toasted above
+      } else {
         toast({
-          title: "Personalized Guidance Unveiled!",
-          description: `Insight: ${dynamicGuidanceResult.generated_pattern_name}`,
+          title: tToast('titlePersonalizedGuidanceUnveiled'),
+          description: tToast('descInsightGenerated', { insightName: dynamicGuidanceResult.generated_pattern_name }),
         });
       }
       setShowGuidance(true);
 
     } catch (e: any) {
       console.error("AI processing error in DharmalensPage:", e.message, e.stack, e.cause);
-      const originalErrorMessage = e.message || 'An unexpected error occurred during AI processing.';
-      const finalErrorMessage = `An error occurred: ${originalErrorMessage}${e.stack ? `\nStack: ${e.stack}` : ''}`;
+      const originalErrorMessage = e.message || tPage('errorUnexpectedAI');
+      const finalErrorMessage = tPage('errorOccurredWithDetails', { errorMessage: originalErrorMessage, stack: e.stack ? `\nStack: ${e.stack}` : '' });
       setError(finalErrorMessage);
       toast({
-        title: "Guidance Generation Failed",
-        description: originalErrorMessage + " Please try rephrasing or try again later.",
+        title: tToast('titleGuidanceFailed'),
+        description: tToast('descGuidanceFailed', { error: originalErrorMessage }),
         variant: "destructive",
       });
-       setShowGuidance(false);
+      setShowGuidance(false); 
     } finally {
       setIsProcessingAI(false);
     }
-  }, [userSituation, toast]);
+  }, [userSituation, toast, locale, tPage, tToast]);
 
   const handleScrollToGuidance = () => {
     guidanceSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -231,7 +247,7 @@ export default function DharmalensPage() {
           <AppHeaderContent />
           <div className="mt-8 md:mt-10 max-w-2xl w-full mx-auto">
             <p className="text-sm text-center text-muted-foreground mb-3">
-              Describe your situation or choose a theme to begin.
+              {tAppHeader('subtitle2')}
             </p>
             <SituationCanvas
               userSituation={userSituation}
@@ -242,18 +258,18 @@ export default function DharmalensPage() {
           </div>
         </div>
       </header>
-
-      {showScrollButton && !isProcessingAI && showGuidance && ( 
-        <button
+      
+      {showScrollButton && !isProcessingAI && showGuidance && (
+         <button
           onClick={handleScrollToGuidance}
           className={cn(
             "scroll-down-indicator",
             { 'hidden-by-scroll': !showScrollButton }
           )}
-          aria-label="View Your Guidance"
+          aria-label={tScrollIndicator('label')}
         >
           <ChevronDown />
-          <span className="ml-2 text-xs">View Your Guidance</span>
+          <span className="ml-2 text-xs">{tScrollIndicator('text', { default: "View Your Guidance"})}</span>
         </button>
       )}
 
@@ -262,17 +278,17 @@ export default function DharmalensPage() {
           {error && !isProcessingAI && (
             <Alert variant="destructive" className="mb-6 w-full animate-fade-in-up bg-destructive/10 border-destructive/30 shadow-lg">
               <Sparkles className="h-5 w-5 text-destructive" />
-              <AlertTitle className="text-lg text-destructive font-semibold">Guidance System Hiccup</AlertTitle>
+              <AlertTitle className="text-lg text-destructive font-semibold">{tPage('errorAlertTitle')}</AlertTitle>
               <AlertDescription className="text-base text-destructive/90 whitespace-pre-wrap space-y-1 mt-1">
                 {error.includes("[GoogleGenerativeAI Error]") || error.includes("Failed to generate") ? (
                   <>
-                    <p>Our cosmic guide is currently in deep meditation. This is a moment to practice patience.</p>
-                    <p className="text-sm">Take three deep breaths and try again in a few moments. Sometimes the wisest path reveals itself after a brief pause. 🕉️</p>
+                    <p>{tPage('errorAIGuideMeditating')}</p>
+                    <p className="text-sm">{tPage('errorAIGuidePatience')}</p>
                   </>
                 ) : (
                   <>
-                    <p>A temporary disturbance in the cosmic flow has occurred.</p>
-                    <p className="text-sm">Let's approach this challenge with mindful awareness. Please try your query again. 🌟</p>
+                    <p>{tPage('errorCosmicFlowDisturbance')}</p>
+                    <p className="text-sm">{tPage('errorCosmicFlowRetry')}</p>
                   </>
                 )}
               </AlertDescription>
@@ -280,10 +296,10 @@ export default function DharmalensPage() {
           )}
 
           {isProcessingAI && (
-               <div className="flex flex-col items-center justify-center mt-8 animate-fade-in-up text-center">
+              <div className="flex flex-col items-center justify-center mt-8 animate-fade-in-up text-center">
                   <Loader2 className="h-10 w-10 animate-spin text-primary" />
-                  <p className="mt-4 text-md text-muted-foreground">Unveiling Your Path...</p>
-                  <p className="text-sm text-muted-foreground/80">Seeking wisdom from the ancient scrolls.</p>
+                  <p className="mt-4 text-md text-muted-foreground">{tPage('loadingUnveilingPath')}</p>
+                  <p className="text-sm text-muted-foreground/80">{tPage('loadingSeekingWisdom')}</p>
               </div>
           )}
 
@@ -295,7 +311,7 @@ export default function DharmalensPage() {
                 enhancedGuidance={enhancedGuidance}
                 shlokaDetails={shlokaDetails}
                 onReset={resetState}
-                isDynamicPattern={isDynamicPatternFlag}
+                isDynamicPattern={isDynamicPatternFlag} 
               />
             </div>
           )}
